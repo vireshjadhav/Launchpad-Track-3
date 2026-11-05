@@ -13,11 +13,9 @@ public class TankSpawner : MonoBehaviour
         public Material color;
     }
 
-    [SerializeField]
-    private TankView tankView;
+    [SerializeField] private TankView tankView;
 
-    [SerializeField]
-    private List<Tank> tank;
+    [SerializeField] private List<Tank> tank;
 
     // Start is called before the first frame update
     void Start()
