@@ -9886,10 +9886,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7796484086670525478}
-  - component: {fileID: 6120503357018470802}
   - component: {fileID: 8239892645327165633}
   - component: {fileID: 6177545928165891003}
   - component: {fileID: 1631346930846710338}
+  - component: {fileID: 6120503357018470802}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Untagged
@@ -9915,24 +9915,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6120503357018470802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7796484086670563782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5a3e5eb8f410df4fbda58f7e22467e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 8239892645327165633}
-  childs:
-  - {fileID: 7796484086668625590}
-  - {fileID: 7796484086668625584}
-  - {fileID: 7796484086668625598}
-  - {fileID: 7796484086668625588}
 --- !u!54 &8239892645327165633
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9972,7 +9954,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 4932ab25b84dd7649b80af68a9660ddc, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d7ca9fb5aa30155449192b23d7fb3336, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -10058,6 +10040,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6120503357018470802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7796484086670563782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5a3e5eb8f410df4fbda58f7e22467e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 8239892645327165633}
+  childs:
+  - {fileID: 7796484086668625590}
+  - {fileID: 7796484086668625584}
+  - {fileID: 7796484086668625598}
+  - {fileID: 7796484086668625588}
 --- !u!1 &7796484086670563786
 GameObject:
   m_ObjectHideFlags: 0

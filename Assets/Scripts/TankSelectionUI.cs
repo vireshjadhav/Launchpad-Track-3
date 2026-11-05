@@ -5,20 +5,11 @@ using UnityEngine.UI;
 
 public class TankSelectionUI : MonoBehaviour
 {
-    [SerializeField]
-    private Button greenTankButton;
-
-    [SerializeField]
-    private Button redTankButton;
-
-    [SerializeField]
-    private Button blueTankButton;
-
-    [SerializeField]
-    private Button yellowTankButton;
-
-    [SerializeField]
-    private TankSpawner tankSpawner;
+    [SerializeField] private Button greenTankButton;
+    [SerializeField] private Button redTankButton;
+    [SerializeField] private Button blueTankButton;
+    [SerializeField] private Button yellowTankButton;
+    [SerializeField] private TankSpawner tankSpawner;
 
     // Start is called before the first frame update
     void Start()

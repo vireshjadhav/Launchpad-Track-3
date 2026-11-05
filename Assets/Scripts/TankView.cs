@@ -9,11 +9,9 @@ public class TankView : MonoBehaviour
     private float movement;
     private float rotation;
 
-    [SerializeField]
-    private Rigidbody rb;
+    [SerializeField] private Rigidbody rb;
 
-    [SerializeField]
-    private MeshRenderer[] childs;
+    [SerializeField] private MeshRenderer[] childs;
 
     void Awake()
     {
