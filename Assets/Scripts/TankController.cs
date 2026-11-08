@@ -6,11 +6,13 @@ public class TankController
     private TankView tankView;
 
     private Rigidbody rb;
+    private TankHealthUI healthUI;
 
     public TankController(TankModel _tankModel, TankView _tankView)
     {
         tankModel = _tankModel;
         tankView = GameObject.Instantiate<TankView>(_tankView, _tankView.transform.position, Quaternion.identity);
+        healthUI = tankView.HealthUI;
 
         rb = tankView.GetRigidbody();
 
@@ -18,6 +20,27 @@ public class TankController
         tankView.SetTankController(this);
 
         tankView.ChangeColor(tankModel.color);
+        UpdateHealthUI();
+    }
+
+    public void TakeDamage(float damage)
+    {
+        if(tankModel.IsDead) return;
+
+        tankModel.TakeDamage(damage);
+
+        UpdateHealthUI();
+
+        if(tankModel.IsDead)
+        {
+            tankView.PlayeExplosion();
+            tankView.DisableTank();
+        }
+    }
+
+    private void UpdateHealthUI()
+    {
+        healthUI.UpdateHealth(tankModel.CurrentHealth, tankModel.MaxHealth);
     }
 
     public void Move(float movement, float movementSpeeed)

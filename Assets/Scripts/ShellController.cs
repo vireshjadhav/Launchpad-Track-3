@@ -76,7 +76,7 @@ public class ShellController : MonoBehaviour
             float damage = CalculateDamage(targetTank.transform.position);
 
             //Apply Damage to the Tank in Radius
-            //targetTank.GetTankController().TakeDamage(damage);
+            targetTank.GetTankController().TakeDamage(damage);
         }
     }
 

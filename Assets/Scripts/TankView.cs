@@ -6,12 +6,17 @@ public class TankView : MonoBehaviour
 {
     private TankController tankController;
 
+    [SerializeField] private Rigidbody rb;
+    [SerializeField] private MeshRenderer[] childs;
+    [SerializeField] private GameObject explosionPrefab;
+    [SerializeField] private TankHealthUI healthUI;
+
     private float movement;
     private float rotation;
+    private ParticleSystem explosionParticles;
+    private AudioSource explosionAudio;
 
-    [SerializeField] private Rigidbody rb;
-
-    [SerializeField] private MeshRenderer[] childs;
+    public TankHealthUI HealthUI => healthUI;
 
     void Awake()
     {
@@ -19,11 +24,10 @@ public class TankView : MonoBehaviour
         cam.transform.SetParent(transform);
         cam.transform.position = new Vector3(0.0f, 3.0f,-4.0f);
         cam.transform.rotation = Quaternion.Euler(15.0f, 0.0f, 0.0f);
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+        explosionParticles = Instantiate(explosionPrefab).GetComponent<ParticleSystem>();
+        explosionAudio = explosionParticles.GetComponent<AudioSource>();
+        explosionParticles.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -57,5 +61,21 @@ public class TankView : MonoBehaviour
         }
     }
 
+    public void PlayeExplosion()
+    {
+        explosionParticles.transform.position = transform.position;
+        explosionParticles.gameObject.SetActive (true);
+
+        explosionParticles.Play();
+        explosionAudio.Play();
+    }
+
+    public void DisableTank()
+    {
+        gameObject.SetActive (false);
+    }
+
     public Rigidbody GetRigidbody() => rb;
+
+    public TankController GetTankController() => tankController;
 }

@@ -11,6 +11,7 @@ public class TankSpawner : MonoBehaviour
         public float rotationSpeed;
         public TankTypes type;
         public Material color;
+        public float health;
     }
 
     [SerializeField] private TankView tankView;
@@ -35,7 +36,7 @@ public class TankSpawner : MonoBehaviour
         if(tankType == TankTypes.YellowTank)
             currentTank = 3;
 
-        TankModel tankModel = new TankModel(tank[currentTank].movementSpeed, tank[currentTank].rotationSpeed, tank[currentTank].type, tank[currentTank].color);
+        TankModel tankModel = new TankModel(tank[currentTank].movementSpeed, tank[currentTank].rotationSpeed, tank[currentTank].type, tank[currentTank].color, tank[currentTank].health);
         TankController tankController = new TankController(tankModel, tankView);
     }
 }
