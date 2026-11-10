@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionParticles: {fileID: 1888644639107153052}
-  trail: {fileID: 1888644639107153054}
+  trail: {fileID: 1888644637672323853}
   shellMesh: {fileID: 1888644637669898733}
   shellBody: {fileID: 1888644637671924118}
   shellCollider: {fileID: 1888644637671924119}
