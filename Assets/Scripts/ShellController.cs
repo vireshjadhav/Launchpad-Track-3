@@ -98,7 +98,6 @@ public class ShellController : MonoBehaviour
         { 
         explosionAudio.clip = explosionClip;
         explosionAudio.Play();
-        Debug.Log("AudioPlayed");
         }
 
         Destroy(explosionParticles.gameObject, explosionParticles.main.duration);
