@@ -4,10 +4,12 @@ public class TankModel
 {
     private TankController tankController;
 
+    public string tankName;
     public float movementSpeed;
-    public float rotationSpeeed;
-    public TankTypes type;
+    public float rotationSpeed;
+    public TankType  type;
     public Material color;
+    public Vector3 scale;
 
     private float maxHealth;
     private float currentHealth;
@@ -17,15 +19,16 @@ public class TankModel
     public float MaxHealth => maxHealth;
     public bool IsDead => isDead;
 
-
-    public TankModel(float _movementSpeed, float rotationSpeed, TankTypes _type, Material _color, float _health)
+    public TankModel(TankScriptableObject _tank)
     {
-        movementSpeed = _movementSpeed;
-        rotationSpeeed = rotationSpeed;
-        type = _type;
-        color = _color;
-        maxHealth = _health;
-        currentHealth = _health;
+        tankName = _tank.tankName;
+        movementSpeed = _tank.movementSpeed;
+        rotationSpeed = _tank.rotationSpeed;
+        type = _tank.tankTypes;
+        color = _tank.color;
+        maxHealth = _tank.maxHealth;
+        currentHealth = _tank.maxHealth;
+        scale = _tank.scale;
         isDead = false;
     }
 

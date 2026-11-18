@@ -1,5 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7804426552401575193
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66f335fb1ffd8684294ad653bf1c7564, type: 3}
+  m_Name: ColorAdjustments
+  m_EditorClassIdentifier: 
+  active: 1
+  postExposure:
+    m_OverrideState: 1
+    m_Value: 0.25
+  contrast:
+    m_OverrideState: 1
+    m_Value: 15.5
+  colorFilter:
+    m_OverrideState: 0
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  hueShift:
+    m_OverrideState: 1
+    m_Value: -4
+  saturation:
+    m_OverrideState: 1
+    m_Value: 9
 --- !u!114 &-5634266768482542091
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -55,6 +83,7 @@ MonoBehaviour:
   - {fileID: -2333009513195382106}
   - {fileID: -5634266768482542091}
   - {fileID: 8345483200555957277}
+  - {fileID: -7804426552401575193}
 --- !u!114 &5200101360502633460
 MonoBehaviour:
   m_ObjectHideFlags: 3
