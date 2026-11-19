@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tankName: RedTank
   tankTypes: 1
+  shellType: 2
   movementSpeed: 10
   rotationSpeed: 60
   maxHealth: 150
+  launchVelocity: 15
   color: {fileID: 2100000, guid: 463052f3f7389124f9e7b34b0b931d0d, type: 2}
   scale: {x: 1.5, y: 1.5, z: 1.5}

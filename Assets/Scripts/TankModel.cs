@@ -8,6 +8,7 @@ public class TankModel
     public float movementSpeed;
     public float rotationSpeed;
     public TankType  type;
+    public ShellType shellType;
     public Material color;
     public Vector3 scale;
 
@@ -25,6 +26,7 @@ public class TankModel
         movementSpeed = _tank.movementSpeed;
         rotationSpeed = _tank.rotationSpeed;
         type = _tank.tankTypes;
+        shellType = _tank.shellType;
         color = _tank.color;
         maxHealth = _tank.maxHealth;
         currentHealth = _tank.maxHealth;
@@ -53,4 +55,6 @@ public class TankModel
         currentHealth = maxHealth;
         isDead = false;
     }
+
+    public ShellType GetShellType() => shellType;
 }
