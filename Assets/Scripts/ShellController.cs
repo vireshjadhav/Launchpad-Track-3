@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShellController : MonoBehaviour
@@ -11,21 +8,47 @@ public class ShellController : MonoBehaviour
     [SerializeField] private Rigidbody shellBody;
     [SerializeField] private Collider shellCollider;
 
-    [SerializeField] private float explosionRadius = 5.0f;
-    [SerializeField] private float explosionForce = 1000.0f;
-    [SerializeField] private float maxDamage = 100.0f;
-    [SerializeField] private float maxLifeTime = 5.0f;
-
     [SerializeField] private AudioSource explosionAudio;
     [SerializeField] private AudioClip explosionClip;
     [SerializeField] private AudioClip fireClip;
 
+    public ShellScriptableObjectList shellList;
+
     private bool exploded = false;
+
+    private float explosionRadius;
+    private float explosionForce;
+    private float maxDamage;
+    private float maxLifeTime;
+
+    private bool GetShellProperties(ShellType shellType)
+    {
+        ShellScriptableObject shell = shellList.shells.Find(t => t.shellTypes == shellType);
+        if (shell == null)
+        {
+            Debug.LogError($"No ShellScriptableObject for {shellType}");
+            return false;
+        }
+
+        transform.localScale = shell.size;
+
+        explosionRadius = shell.explosionRadius;
+        explosionForce = shell.explosionForce;
+        maxDamage = shell.maxDamage;
+        maxLifeTime = shell.maxLifeTime;
+
+        return true;
+    }
 
     private void OnCollisionEnter(Collision collision) => Explode();
 
-    public void SetShellProperties(Transform exitPoint, float launchVelocity)
+    public void SetShellProperties(Transform exitPoint, float launchVelocity, ShellType shellType)
     {
+        if(!GetShellProperties(shellType))
+        {
+            Destroy(gameObject);
+            return;
+        }
         SetShootingAudio();
         SetShellActive(true);
         transform.SetPositionAndRotation(exitPoint.position, exitPoint.rotation);
@@ -59,6 +82,7 @@ public class ShellController : MonoBehaviour
         SetOffExplosion();
         SetShellActive(false);
         
+        CancelInvoke(nameof(Explode));
         Destroy(gameObject);
     }
 
@@ -105,6 +129,9 @@ public class ShellController : MonoBehaviour
 
     private float CalculateDamage(Vector3 targetPosion)
     {
+        if(explosionRadius <= 0.0f) 
+            return 0.0f;
+
         Vector3 explosionToTarget = targetPosion - transform.position;
         float explosionDistance = explosionToTarget.magnitude;
         float relativeDistance = (explosionRadius - explosionDistance) / explosionRadius;

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -63,9 +61,9 @@ public class TankShooting : MonoBehaviour
     private void Fire()
     {
         fired = true;
-
+        ShellType shellType = this.GetComponent<TankView>().GetTankController().GetTankModel().GetShellType();
         ShellController shellInstance = Instantiate(shellPrefab);
-        shellInstance.SetShellProperties(fireTransform, currentLaunchVelocity);
+        shellInstance.SetShellProperties(fireTransform, currentLaunchVelocity, shellType);
 
         shootingAudio.clip = fireClip;
         shootingAudio.Play();

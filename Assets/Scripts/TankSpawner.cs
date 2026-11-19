@@ -4,39 +4,23 @@ using UnityEngine;
 
 public class TankSpawner : MonoBehaviour
 {
-    [System.Serializable]
-    public class Tank
-    {
-        public float movementSpeed;
-        public float rotationSpeed;
-        public TankTypes type;
-        public Material color;
-        public float health;
-    }
 
     [SerializeField] private TankView tankView;
 
-    [SerializeField] private List<Tank> tank;
-
-    // Start is called before the first frame update
-    void Start()
+    public TankScriptableObjectList tankList;
+ 
+    public void CreateTank(TankType tankType)
     {
-    }
+        TankScriptableObject tank = tankList.tanks.Find(t => t.tankTypes == tankType);
 
-    public void CreateTank(TankTypes tankType)
-    {
-        int currentTank = 0;
+        if(tank == null)
+        {
+            Debug.LogError($"No TankScriptableObject for {tankType}");
+            return;
+        }
 
-        if (tankType == TankTypes.GreenTank)
-            currentTank = 0;
-        if(tankType == TankTypes.RedTank)
-            currentTank = 1;
-        if (tankType == TankTypes.BlueTank)
-            currentTank = 2;
-        if(tankType == TankTypes.YellowTank)
-            currentTank = 3;
+        TankModel tankModel = new TankModel(tank);
 
-        TankModel tankModel = new TankModel(tank[currentTank].movementSpeed, tank[currentTank].rotationSpeed, tank[currentTank].type, tank[currentTank].color, tank[currentTank].health);
         TankController tankController = new TankController(tankModel, tankView);
     }
 }

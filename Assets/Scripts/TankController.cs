@@ -20,6 +20,7 @@ public class TankController
         tankView.SetTankController(this);
 
         tankView.ChangeColor(tankModel.color);
+        SetTankScale(tankModel.scale);
         UpdateHealthUI();
     }
 
@@ -33,6 +34,7 @@ public class TankController
 
         if(tankModel.IsDead)
         {
+            tankView.DetachCam();
             tankView.PlayeExplosion();
             tankView.DisableTank();
         }
@@ -54,6 +56,8 @@ public class TankController
         Quaternion deltaRotation = Quaternion.Euler(vector * Time.deltaTime);
         rb.MoveRotation(rb.rotation*deltaRotation);
     }
+
+    public void SetTankScale(Vector3 scale) => tankView.transform.localScale = scale;
 
     public TankModel GetTankModel() => tankModel;
 }

@@ -315,13 +315,11 @@ MonoBehaviour:
   shellMesh: {fileID: 1888644637669898733}
   shellBody: {fileID: 1888644637671924118}
   shellCollider: {fileID: 1888644637671924119}
-  explosionRadius: 5
-  explosionForce: 1000
-  maxDamage: 100
-  maxLifeTime: 2
   explosionAudio: {fileID: 9160242751343834835}
   explosionClip: {fileID: 8300000, guid: 3a77defcde1caaa40b6f7502547e0c4e, type: 3}
   fireClip: {fileID: 8300000, guid: 672a9941361ad494a99fba36759eca80, type: 3}
+  shellType: 0
+  shellList: {fileID: 11400000, guid: 8dff1aa5008d8554686eb7a8ec42984b, type: 2}
 --- !u!1001 &1219685437224566327
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -27,30 +27,24 @@ public class TankSelectionUI : MonoBehaviour
             yellowTankButton.onClick.AddListener(YellowTankSelection);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void GreenTankSelection()
     {
-        tankSpawner.CreateTank(TankTypes.GreenTank);
+        tankSpawner.CreateTank(TankType.GreenTank);
         this.gameObject.SetActive(false);
     }
     private void RedTankSelection()
     {
-        tankSpawner.CreateTank(TankTypes.RedTank);
+        tankSpawner.CreateTank(TankType.RedTank);
         this.gameObject.SetActive(false);
     }
     private void BlueTankSelection()
     {
-        tankSpawner.CreateTank(TankTypes.BlueTank);
+        tankSpawner.CreateTank(TankType.BlueTank);
         this.gameObject.SetActive(false);
     }
     private void YellowTankSelection()
     {
-        tankSpawner.CreateTank(TankTypes.YellowTank);
+        tankSpawner.CreateTank(TankType.YellowTank);
         this.gameObject.SetActive(false);
     }
 
