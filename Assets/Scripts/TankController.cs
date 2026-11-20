@@ -1,4 +1,4 @@
-    using UnityEngine;
+using UnityEngine;
 
 public class TankController
 {
@@ -8,10 +8,6 @@ public class TankController
     private Rigidbody rb;
     private TankHealthUI healthUI;
 
-    private float chargingVelocity;
-
-    private bool fired = false;
-
     public TankController(TankModel _tankModel, TankView _tankView)
     {
         tankModel = _tankModel;
@@ -20,14 +16,12 @@ public class TankController
 
         rb = tankView.GetRigidbody();
 
-        tankModel.SetTankController(this);
         tankView.SetTankController(this);
 
         tankView.ChangeColor(tankModel.color);
         SetTankScale(tankModel.scale);
         UpdateHealthUI();
 
-        SetInitialLaunchVelocity();
         ResetLaunchVelocity();
     }
 
@@ -53,45 +47,8 @@ public class TankController
         tankView.UpdateArrowSlider(tankModel.MinShellVelocity);
     }
 
-    public void SetInitialLaunchVelocity()
+    public void Fire()
     {
-        if(tankModel.MaxChargeTime <= 0) 
-        {
-            Debug.LogError("Maximum Charge Time must be greater than zero.");
-            return; 
-        }   
-        chargingVelocity = (tankModel.MaxShellVelocity - tankModel.MinShellVelocity) / tankModel.MaxChargeTime;
-    }
-
-    public void SetLaunchVelocity()
-    {
-        if (tankModel.CurrentLaunchVelocity >= tankModel.MaxShellVelocity && !fired)
-        {
-            tankModel.SetLaunchVelocity(tankModel.MaxShellVelocity);
-            Fire();
-        }
-        else if (Input.GetMouseButtonDown(0))
-        {
-            fired = false;
-            tankModel.SetLaunchVelocity(tankModel.MinShellVelocity);
-            tankView.PlayChargingClip();
-        }
-        else if (Input.GetMouseButton(0) && !fired)
-        {
-            float velocity = Mathf.Min(tankModel.CurrentLaunchVelocity + chargingVelocity * Time.deltaTime, tankModel.MaxShellVelocity);
-            tankModel.SetLaunchVelocity(velocity);
-            tankView.UpdateArrowSlider(velocity);
-        }
-        else if (Input.GetMouseButtonUp(0) && !fired)
-        {
-            Fire();
-        }
-    }
-
-    private void Fire()
-    {
-        fired = true;
-
         tankView.Fire(tankModel.CurrentLaunchVelocity);
         tankView.PlayFireClip();
 
@@ -104,16 +61,15 @@ public class TankController
         healthUI.UpdateHealth(tankModel.CurrentHealth, tankModel.MaxHealth);
     }
 
-    public void Move(float movement, float movementSpeeed)
+    public void Move(float movement)
     {
-        rb.velocity = tankView.transform.forward * movement * movementSpeeed;
-
+        rb.velocity = tankView.transform.forward * movement * tankModel.movementSpeed;
     }
 
-    public void Rotate(float rotation, float rotationSpeed)
+    public void Rotate(float rotation)
     {
-        Vector3 vector = new Vector3(0.0f, rotation * rotationSpeed, 0.0f);
-        Quaternion deltaRotation = Quaternion.Euler(vector * Time.deltaTime);
+        Vector3 vector = new Vector3(0.0f, rotation * tankModel.rotationSpeed, 0.0f);
+        Quaternion deltaRotation = Quaternion.Euler(vector * Time.fixedDeltaTime);
         rb.MoveRotation(rb.rotation * deltaRotation);
     }
 

@@ -861,6 +861,7 @@ GameObject:
   - component: {fileID: 1631346930846710338}
   - component: {fileID: 2045302359033538892}
   - component: {fileID: 6120503357018470802}
+  - component: {fileID: 5222600881691535228}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Untagged
@@ -1140,6 +1141,18 @@ MonoBehaviour:
   fireClip: {fileID: 8300000, guid: 672a9941361ad494a99fba36759eca80, type: 3}
   shellPrefab: {fileID: 4787996438960372904, guid: 8c278e73769008e40beb025ffe87abc2,
     type: 3}
+--- !u!114 &5222600881691535228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7796484086670563782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f587d6b7e805b54ea157d7aaa539ecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7796484086670563786
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,11 +2,7 @@ using UnityEngine;
 
 public class TankModel
 {
-    private TankController tankController;
-
     public string tankName;
-    public float movementSpeed;
-    public float rotationSpeed;
     public TankType  type;
     public ShellType shellType;
     public Material color;
@@ -14,14 +10,15 @@ public class TankModel
 
     private float maxHealth;
     private float currentHealth;
-    private bool isDead;
+    private float currentLaunchVelocity;
+    public float movementSpeed;
+    public float rotationSpeed;
 
     private float minShellVelocity = 15.0f;
     private float maxShellVelocity = 30.0f;
     private float maxChargeTime = 0.75f;
 
-    private float currentLaunchVelocity;
-
+    private bool isDead;
 
     public float CurrentLaunchVelocity => currentLaunchVelocity;
     public float CurrentHealth => currentHealth;
@@ -43,11 +40,6 @@ public class TankModel
         currentHealth = _tank.maxHealth;
         scale = _tank.scale;
         isDead = false;
-    }
-
-    public void SetTankController(TankController _tankController)
-    {
-        tankController = _tankController;
     }
 
     public void TakeDamage(float damage)

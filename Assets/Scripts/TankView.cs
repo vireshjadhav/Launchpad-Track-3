@@ -20,9 +20,6 @@ public class TankView : MonoBehaviour
     [SerializeField] private AudioClip fireClip;
     [SerializeField] private ShellController shellPrefab;
 
-
-    private float movement;
-    private float rotation;
     private ParticleSystem explosionParticles;
     private AudioSource explosionAudio;
 
@@ -41,27 +38,6 @@ public class TankView : MonoBehaviour
         explosionParticles = Instantiate(explosionPrefab).GetComponent<ParticleSystem>();
         explosionAudio = explosionParticles.GetComponent<AudioSource>();
         explosionParticles.gameObject.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Movement();
-
-        if(movement != 0)
-            tankController.Move(movement, tankController.GetTankModel().movementSpeed);
-
-        if (rotation != 0)
-            tankController.Rotate(rotation, tankController.GetTankModel().rotationSpeed);
-
-        PlayMovementAudio();
-        tankController.SetLaunchVelocity();
-    }
-
-    private  void Movement()
-    {
-        movement = Input.GetAxis("Vertical");
-        rotation = Input.GetAxis("Horizontal");
     }
 
     public void SetTankController(TankController _tankController)
