@@ -27,14 +27,8 @@ public class TankView : MonoBehaviour
 
     public TankHealthUI HealthUI => healthUI;
 
-
     void Awake()
     {
-        cam = GameObject.Find("Main Camera");
-        cam.transform.SetParent(transform);
-        cam.transform.position = new Vector3(-12.0f, 15.0f,-10.0f);
-        cam.transform.rotation = Quaternion.Euler(37.0f, 50.0f, 0.0f);
-
         explosionParticles = Instantiate(explosionPrefab).GetComponent<ParticleSystem>();
         explosionAudio = explosionParticles.GetComponent<AudioSource>();
         explosionParticles.gameObject.SetActive(false);
@@ -103,14 +97,20 @@ public class TankView : MonoBehaviour
         shellInstance.SetShellProperties(fireTransform, velocity, tankController.GetTankModel().shellType);
     }
 
-    public void DetachCam()
-    {
-        cam.transform.parent = null;
-    }
-
     public void DisableTank()
     {
         gameObject.SetActive (false);
+    }
+
+    public void SetCamera(GameObject cameraObject)
+    {
+        cam = cameraObject;
+    }
+
+    public void DetachCam()
+    {
+        if(cam != null)
+            cam.transform.parent = null;
     }
 
     public Rigidbody GetRigidbody() => rb;

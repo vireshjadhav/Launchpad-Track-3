@@ -9,13 +9,30 @@ public class PlayerTankInput : MonoBehaviour
     private TankController tankController;
     private TankView tankView;
     private TankModel tankModel;
+    private GameObject cam;
 
     private bool fired = false;
+
+
+    private void Awake()
+    {
+        cam = GameObject.Find("Main Camera");
+
+        if (cam == null) 
+            return;
+
+        cam.transform.SetParent(transform);
+        cam.transform.position = new Vector3(-12.0f, 15.0f, -10.0f);
+        cam.transform.rotation = Quaternion.Euler(37.0f, 50.0f, 0.0f);
+
+
+        tankView = GetComponent<TankView>();
+        tankView.SetCamera(cam);
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        tankView = GetComponent<TankView>();
         tankController = tankView.GetTankController();
         tankModel = tankController.GetTankModel();
 
@@ -82,5 +99,10 @@ public class PlayerTankInput : MonoBehaviour
             fired = true;
             tankController.Fire();
         }
+    }
+
+    public void DetachCam()
+    {
+        cam.transform.parent = null;
     }
 }
