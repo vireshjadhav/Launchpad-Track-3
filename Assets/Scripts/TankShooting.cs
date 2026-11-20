@@ -33,6 +33,11 @@ public class TankShooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SetLaunchVelocity();
+    }
+
+    private void SetLaunchVelocity()
+    {
         if (currentLaunchVelocity >= maxShellVelocity && !fired)
         {
             currentLaunchVelocity = maxShellVelocity;
@@ -51,11 +56,10 @@ public class TankShooting : MonoBehaviour
             currentLaunchVelocity += chargingVelocity * Time.deltaTime;
             aimSlider.value = currentLaunchVelocity;
         }
-        else if(Input.GetMouseButtonUp(0) && !fired)
+        else if (Input.GetMouseButtonUp(0) && !fired)
         {
-            Fire(); 
+            Fire();
         }
-
     }
 
     private void Fire()

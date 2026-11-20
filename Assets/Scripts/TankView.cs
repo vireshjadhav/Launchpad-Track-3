@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TankView : MonoBehaviour
 {
@@ -11,6 +10,17 @@ public class TankView : MonoBehaviour
     [SerializeField] private GameObject explosionPrefab;
     [SerializeField] private TankHealthUI healthUI;
 
+    [SerializeField] private Transform fireTransform;
+    [SerializeField] private Slider aimSlider;
+    [SerializeField] private AudioSource shootingAudio;
+    [SerializeField] private AudioSource engineAudio;
+    [SerializeField] private AudioClip drivingClip;
+    [SerializeField] private AudioClip idleClip;
+    [SerializeField] private AudioClip chargingClip;
+    [SerializeField] private AudioClip fireClip;
+    [SerializeField] private ShellController shellPrefab;
+
+
     private float movement;
     private float rotation;
     private ParticleSystem explosionParticles;
@@ -19,6 +29,7 @@ public class TankView : MonoBehaviour
     private GameObject cam;
 
     public TankHealthUI HealthUI => healthUI;
+
 
     void Awake()
     {
@@ -42,6 +53,9 @@ public class TankView : MonoBehaviour
 
         if (rotation != 0)
             tankController.Rotate(rotation, tankController.GetTankModel().rotationSpeed);
+
+        PlayMovementAudio();
+        tankController.SetLaunchVelocity();
     }
 
     private  void Movement()
@@ -63,6 +77,41 @@ public class TankView : MonoBehaviour
         }
     }
 
+    public void PlayMovementAudio()
+    {
+        if (rb.velocity != Vector3.zero && engineAudio.clip != drivingClip)
+        {
+            engineAudio.clip = drivingClip;
+            engineAudio.Play();
+        }
+        else if (rb.velocity == Vector3.zero && engineAudio.clip != idleClip)
+        {
+            engineAudio.clip = idleClip;
+            engineAudio.Play();
+        }
+    }
+
+
+    public void PlayChargingClip()
+    {
+        if (!chargingClip) return;
+        shootingAudio.clip = chargingClip;
+        shootingAudio.Play();
+    }
+
+    public void PlayFireClip()
+    {
+        if (!fireClip) return;
+        shootingAudio.clip = fireClip;
+        shootingAudio.Play();
+    }
+
+    public void UpdateArrowSlider(float velocity)
+    {
+        if(aimSlider != null)
+            aimSlider.value = velocity;
+    }
+
     public void PlayeExplosion()
     {
         explosionParticles.transform.position = transform.position;
@@ -70,6 +119,12 @@ public class TankView : MonoBehaviour
 
         explosionParticles.Play();
         explosionAudio.Play();
+    }
+
+    public void Fire(float velocity)
+    {
+        ShellController shellInstance = Instantiate(shellPrefab);
+        shellInstance.SetShellProperties(fireTransform, velocity, tankController.GetTankModel().shellType);
     }
 
     public void DetachCam()
