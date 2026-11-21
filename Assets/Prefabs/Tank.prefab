@@ -1132,7 +1132,6 @@ MonoBehaviour:
     type: 3}
   healthUI: {fileID: 7216595524570786187}
   fireTransform: {fileID: 2011075264}
-  aimSlider: {fileID: 1671387414}
   shootingAudio: {fileID: 2045302359033538892}
   engineAudio: {fileID: 1631346930846710338}
   drivingClip: {fileID: 8300000, guid: d7ca9fb5aa30155449192b23d7fb3336, type: 3}
@@ -1153,6 +1152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f587d6b7e805b54ea157d7aaa539ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aimSlider: {fileID: 1671387414}
+  minShellVelocity: 15
+  maxShellVelocity: 30
 --- !u!1 &7796484086670563786
 GameObject:
   m_ObjectHideFlags: 0

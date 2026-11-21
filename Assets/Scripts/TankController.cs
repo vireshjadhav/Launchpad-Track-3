@@ -21,8 +21,6 @@ public class TankController
         tankView.ChangeColor(tankModel.color);
         SetTankScale(tankModel.scale);
         UpdateHealthUI();
-
-        ResetLaunchVelocity();
     }
 
     public void TakeDamage(float damage)
@@ -41,19 +39,10 @@ public class TankController
         }
     }
 
-    private void ResetLaunchVelocity()
+    public void Fire(float velocity)
     {
-        tankModel.ResetLaunchVelocity();
-        tankView.UpdateArrowSlider(tankModel.MinShellVelocity);
-    }
-
-    public void Fire()
-    {
-        tankView.Fire(tankModel.CurrentLaunchVelocity);
+        tankView.Fire(velocity, tankModel.shellType);
         tankView.PlayFireClip();
-
-        tankModel.ResetLaunchVelocity();
-        tankView.UpdateArrowSlider(tankModel.MinShellVelocity);
     }
 
     private void UpdateHealthUI()

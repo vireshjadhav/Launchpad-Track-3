@@ -1,15 +1,21 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerTankInput : MonoBehaviour
 {
     private float movement;
     private float rotation;
     private float chargingVelocity;
+    private float currentLaunchVelocity;
 
     private TankController tankController;
     private TankView tankView;
     private TankModel tankModel;
     private GameObject cam;
+
+    [SerializeField] private Slider aimSlider;
+    [SerializeField] private float minShellVelocity = 15.0f;
+    [SerializeField] private float maxShellVelocity = 30.0f;
 
     private bool fired = false;
 
@@ -24,19 +30,19 @@ public class PlayerTankInput : MonoBehaviour
         cam.transform.SetParent(transform);
         cam.transform.position = new Vector3(-12.0f, 15.0f, -10.0f);
         cam.transform.rotation = Quaternion.Euler(37.0f, 50.0f, 0.0f);
-
-
-        tankView = GetComponent<TankView>();
-        tankView.SetCamera(cam);
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        tankView = GetComponent<TankView>();
         tankController = tankView.GetTankController();
         tankModel = tankController.GetTankModel();
+        
+        tankView.SetCamera(cam);
 
         SetInitialLaunchVelocity();
+        ResetLaunchVelocity();
     }
 
     // Update is called once per frame
@@ -54,6 +60,23 @@ public class PlayerTankInput : MonoBehaviour
         tankController.Rotate(rotation);
     }
 
+    public void SetLaunchVelocity(float velocity)
+    {
+        currentLaunchVelocity = Mathf.Clamp(velocity, minShellVelocity, maxShellVelocity);
+    }
+
+    private void ResetLaunchVelocity()
+    {
+        currentLaunchVelocity = minShellVelocity;
+        UpdateArrowSlider(minShellVelocity);
+    }
+
+    public void UpdateArrowSlider(float velocity)
+    {
+        if (aimSlider != null)
+            aimSlider.value = velocity;
+    }
+
     private void Movement()
     {
         movement = Input.GetAxis("Vertical");
@@ -67,38 +90,44 @@ public class PlayerTankInput : MonoBehaviour
             Debug.LogError("Maximum Charge Time must be greater than zero.");
             return;
         }
-        if (tankModel.MaxShellVelocity <= tankModel.MinShellVelocity)
+        if (maxShellVelocity <= minShellVelocity)
         {
             Debug.LogError("Maximum Shell Velocity must be greater than Minimum Shell Velocity.");
             return;
         }
-        chargingVelocity = (tankModel.MaxShellVelocity - tankModel.MinShellVelocity) / tankModel.MaxChargeTime;
+        chargingVelocity = (maxShellVelocity - minShellVelocity) / tankModel.MaxChargeTime;
     }
 
     private void SetLaunchVelocity()
     {
-        if (tankModel.CurrentLaunchVelocity >= tankModel.MaxShellVelocity && !fired)
+        if (currentLaunchVelocity >= maxShellVelocity && !fired)
         {
             fired = true;
-            tankController.Fire();
+            Fire();
         }
         else if (Input.GetMouseButtonDown(0))
         {
             fired = false;
-            tankModel.SetLaunchVelocity(tankModel.MinShellVelocity);
+            SetLaunchVelocity(minShellVelocity);
             tankView.PlayChargingClip();
         }
         else if (Input.GetMouseButton(0) && !fired)
         {
-            float velocity = Mathf.Min(tankModel.CurrentLaunchVelocity + chargingVelocity * Time.deltaTime, tankModel.MaxShellVelocity);
-            tankModel.SetLaunchVelocity(velocity);
-            tankView.UpdateArrowSlider(velocity);
+            float velocity = Mathf.Min(currentLaunchVelocity + chargingVelocity * Time.deltaTime, maxShellVelocity);
+            SetLaunchVelocity(velocity);
+            UpdateArrowSlider(velocity);
         }
         else if (Input.GetMouseButtonUp(0) && !fired)
         {
             fired = true;
-            tankController.Fire();
+            Fire();
         }
+    }
+
+    private void Fire()
+    {
+        tankController.Fire(currentLaunchVelocity);
+        ResetLaunchVelocity();
     }
 
     public void DetachCam()

@@ -11,7 +11,6 @@ public class TankView : MonoBehaviour
     [SerializeField] private TankHealthUI healthUI;
 
     [SerializeField] private Transform fireTransform;
-    [SerializeField] private Slider aimSlider;
     [SerializeField] private AudioSource shootingAudio;
     [SerializeField] private AudioSource engineAudio;
     [SerializeField] private AudioClip drivingClip;
@@ -76,11 +75,7 @@ public class TankView : MonoBehaviour
         shootingAudio.Play();
     }
 
-    public void UpdateArrowSlider(float velocity)
-    {
-        if(aimSlider != null)
-            aimSlider.value = velocity;
-    }
+
 
     public void PlayeExplosion()
     {
@@ -91,10 +86,10 @@ public class TankView : MonoBehaviour
         explosionAudio.Play();
     }
 
-    public void Fire(float velocity)
+    public void Fire(float velocity, ShellType shellType)
     {
         ShellController shellInstance = Instantiate(shellPrefab);
-        shellInstance.SetShellProperties(fireTransform, velocity, tankController.GetTankModel().shellType);
+        shellInstance.SetShellProperties(fireTransform, velocity, shellType);
     }
 
     public void DisableTank()

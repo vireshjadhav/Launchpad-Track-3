@@ -10,21 +10,15 @@ public class TankModel
 
     private float maxHealth;
     private float currentHealth;
-    private float currentLaunchVelocity;
     public float movementSpeed;
     public float rotationSpeed;
 
-    private float minShellVelocity = 15.0f;
-    private float maxShellVelocity = 30.0f;
     private float maxChargeTime = 0.75f;
 
     private bool isDead;
 
-    public float CurrentLaunchVelocity => currentLaunchVelocity;
     public float CurrentHealth => currentHealth;
     public float MaxHealth => maxHealth;
-    public float MinShellVelocity => minShellVelocity;
-    public float MaxShellVelocity => maxShellVelocity;
     public float MaxChargeTime => maxChargeTime;
     public bool IsDead => isDead;
 
@@ -51,16 +45,6 @@ public class TankModel
 
         if (currentHealth <= 0)
             isDead = true;
-    }
-
-    public void SetLaunchVelocity(float velocity)
-    {
-        currentLaunchVelocity = Mathf.Clamp(velocity, minShellVelocity, maxShellVelocity);
-    }
-
-    public void ResetLaunchVelocity()
-    {
-        currentLaunchVelocity = minShellVelocity;
     }
 
     public void ResetHealth()
