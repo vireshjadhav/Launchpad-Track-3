@@ -88,7 +88,6 @@ public class ShellController : MonoBehaviour
 
     private void CheckInRadius()
     {
-
         foreach (var col in Physics.OverlapSphere(transform.position, explosionRadius))
         {
             TankView targetTank = col.GetComponent<TankView>();
@@ -96,9 +95,10 @@ public class ShellController : MonoBehaviour
             if (targetTank == null) continue;
 
             targetTank.GetRigidbody().AddExplosionForce(explosionForce, transform.position, explosionRadius);
-
-            float damage = CalculateDamage(targetTank.transform.position);
-
+            
+            Vector3 closestPoint = col.ClosestPoint(transform.position);
+            float damage = CalculateDamage(closestPoint);
+                
             //Apply Damage to the Tank in Radius
             targetTank.GetTankController().TakeDamage(damage);
         }

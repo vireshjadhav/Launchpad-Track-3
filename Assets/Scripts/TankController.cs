@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class TankController
@@ -16,7 +17,6 @@ public class TankController
 
         rb = tankView.GetRigidbody();
 
-        tankModel.SetTankController(this);
         tankView.SetTankController(this);
 
         tankView.ChangeColor(tankModel.color);
@@ -26,13 +26,13 @@ public class TankController
 
     public void TakeDamage(float damage)
     {
-        if(tankModel.IsDead) return;
+        if (IsDead()) return;
 
         tankModel.TakeDamage(damage);
 
         UpdateHealthUI();
 
-        if(tankModel.IsDead)
+        if (IsDead())
         {
             tankView.DetachCam();
             tankView.PlayeExplosion();
@@ -40,24 +40,41 @@ public class TankController
         }
     }
 
+    public void Fire(float velocity)
+    {
+        tankView.Fire(velocity, tankModel.shellType);
+        tankView.PlayFireClip();
+    }
+
     private void UpdateHealthUI()
     {
         healthUI.UpdateHealth(tankModel.CurrentHealth, tankModel.MaxHealth);
     }
 
-    public void Move(float movement, float movementSpeeed)
+    public void Move(float movement)
     {
-        rb.velocity = tankView.transform.forward * movement * movementSpeeed;
+        rb.velocity = tankView.transform.forward * movement * tankModel.MovementSpeed;
     }
 
-    public void Rotate(float rotation, float rotationSpeed)
+    public void Rotate(float rotation)
     {
-        Vector3 vector = new Vector3(0.0f, rotation * rotationSpeed, 0.0f);
-        Quaternion deltaRotation = Quaternion.Euler(vector * Time.deltaTime);
-        rb.MoveRotation(rb.rotation*deltaRotation);
+        Vector3 vector = new Vector3(0.0f, rotation * tankModel.RotationSpeed, 0.0f);
+        Quaternion deltaRotation = Quaternion.Euler(vector * Time.fixedDeltaTime);
+        rb.MoveRotation(rb.rotation * deltaRotation);
     }
 
     public void SetTankScale(Vector3 scale) => tankView.transform.localScale = scale;
 
     public TankModel GetTankModel() => tankModel;
+
+    public bool IsDead()
+    {
+        return tankModel.IsDead;
+    }
+
+    public void UpdateScore(float tankPoints)
+    {
+        //UpdateUI
+        //UpdateScore
+    }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TankView : MonoBehaviour
@@ -11,8 +9,16 @@ public class TankView : MonoBehaviour
     [SerializeField] private GameObject explosionPrefab;
     [SerializeField] private TankHealthUI healthUI;
 
-    private float movement;
-    private float rotation;
+    [SerializeField] private Transform fireTransform;
+    [SerializeField] private AudioSource shootingAudio;
+    [SerializeField] private AudioSource engineAudio;
+    [SerializeField] private AudioClip drivingClip;
+    [SerializeField] private AudioClip idleClip;
+    [SerializeField] private AudioClip chargingClip;
+    [SerializeField] private AudioClip fireClip;
+    [SerializeField] private ShellController shellPrefab;
+    [SerializeField] private float destroyDelete;
+
     private ParticleSystem explosionParticles;
     private AudioSource explosionAudio;
 
@@ -22,32 +28,9 @@ public class TankView : MonoBehaviour
 
     void Awake()
     {
-        cam = GameObject.Find("Main Camera");
-        cam.transform.SetParent(transform);
-        cam.transform.position = new Vector3(-12.0f, 15.0f,-10.0f);
-        cam.transform.rotation = Quaternion.Euler(37.0f, 50.0f, 0.0f);
-
         explosionParticles = Instantiate(explosionPrefab).GetComponent<ParticleSystem>();
         explosionAudio = explosionParticles.GetComponent<AudioSource>();
         explosionParticles.gameObject.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Movement();
-
-        if(movement != 0)
-            tankController.Move(movement, tankController.GetTankModel().movementSpeed);
-
-        if (rotation != 0)
-            tankController.Rotate(rotation, tankController.GetTankModel().rotationSpeed);
-    }
-
-    private  void Movement()
-    {
-        movement = Input.GetAxis("Vertical");
-        rotation = Input.GetAxis("Horizontal");
     }
 
     public void SetTankController(TankController _tankController)
@@ -63,6 +46,35 @@ public class TankView : MonoBehaviour
         }
     }
 
+    public void PlayMovementAudio()
+    {
+        if (rb.velocity != Vector3.zero && engineAudio.clip != drivingClip)
+        {
+            engineAudio.clip = drivingClip;
+            engineAudio.Play();
+        }
+        else if (rb.velocity == Vector3.zero && engineAudio.clip != idleClip)
+        {
+            engineAudio.clip = idleClip;
+            engineAudio.Play();
+        }
+    }
+
+
+    public void PlayChargingClip()
+    {
+        if (!chargingClip) return;
+        shootingAudio.clip = chargingClip;
+        shootingAudio.Play();
+    }
+
+    public void PlayFireClip()
+    {
+        if (!fireClip) return;
+        shootingAudio.clip = fireClip;
+        shootingAudio.Play();
+    }
+
     public void PlayeExplosion()
     {
         explosionParticles.transform.position = transform.position;
@@ -72,14 +84,31 @@ public class TankView : MonoBehaviour
         explosionAudio.Play();
     }
 
-    public void DetachCam()
+    public void Fire(float velocity, ShellType shellType)
     {
-        cam.transform.parent = null;
+        ShellController shellInstance = Instantiate(shellPrefab);
+        shellInstance.SetShellProperties(fireTransform, velocity, shellType);
     }
 
     public void DisableTank()
     {
-        gameObject.SetActive (false);
+        Transform firstChild = transform.GetChild(0); 
+
+        GameObject firstChildObj = firstChild.gameObject;
+        firstChildObj.SetActive (false);
+
+        Destroy(gameObject, destroyDelete);
+    }
+
+    public void SetCamera(GameObject cameraObject)
+    {
+        cam = cameraObject;
+    }
+
+    public void DetachCam()
+    {
+        if(cam != null)
+            cam.transform.parent = null;
     }
 
     public Rigidbody GetRigidbody() => rb;

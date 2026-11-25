@@ -15,9 +15,10 @@ MonoBehaviour:
   tankName: BlueTank
   tankTypes: 2
   shellType: 0
-  movementSpeed: 25
+  movementSpeed: 13
   rotationSpeed: 120
-  maxHealth: 80
+  maxHealth: 300
   launchVelocity: 15
+  tankPoints: 5
   color: {fileID: 2100000, guid: ff21ff0ea9b18924bb1fdfbb0e58f5cb, type: 2}
   scale: {x: 0.8, y: 0.8, z: 0.8}

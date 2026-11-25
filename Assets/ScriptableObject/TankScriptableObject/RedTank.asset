@@ -17,7 +17,8 @@ MonoBehaviour:
   shellType: 2
   movementSpeed: 10
   rotationSpeed: 60
-  maxHealth: 150
+  maxHealth: 350
   launchVelocity: 15
+  tankPoints: 5
   color: {fileID: 2100000, guid: 463052f3f7389124f9e7b34b0b931d0d, type: 2}
   scale: {x: 1.5, y: 1.5, z: 1.5}

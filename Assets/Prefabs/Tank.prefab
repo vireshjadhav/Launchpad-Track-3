@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1069954233}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 1664597959}
   - component: {fileID: 1664597961}
   - component: {fileID: 1664597960}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1671387413}
   - component: {fileID: 1671387414}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: AimSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2011075264}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FireTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8683859658567331612}
   - component: {fileID: 4076481516680660893}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: HealthSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -334,7 +334,7 @@ GameObject:
   - component: {fileID: 2652807861617495833}
   - component: {fileID: 6870662912303140773}
   - component: {fileID: 1324953700455256268}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -412,7 +412,7 @@ GameObject:
   - component: {fileID: 2061204131688088271}
   - component: {fileID: 4254206629774527406}
   - component: {fileID: 7216595524570786187}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 3835895126594097636}
   - component: {fileID: 9154746823681044676}
   - component: {fileID: 1857445971370839976}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -605,7 +605,7 @@ GameObject:
   - component: {fileID: 7796484086670525472}
   - component: {fileID: 7796484086667658366}
   - component: {fileID: 7796484086668625598}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TankTracksRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -689,7 +689,7 @@ GameObject:
   - component: {fileID: 7796484086670525474}
   - component: {fileID: 7796484086667658352}
   - component: {fileID: 7796484086668625584}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TankTracksLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -773,7 +773,7 @@ GameObject:
   - component: {fileID: 7796484086670525476}
   - component: {fileID: 7796484086667658358}
   - component: {fileID: 7796484086668625590}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TankChassis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -861,10 +861,10 @@ GameObject:
   - component: {fileID: 1631346930846710338}
   - component: {fileID: 2045302359033538892}
   - component: {fileID: 6120503357018470802}
-  - component: {fileID: 1535745822}
-  m_Layer: 0
+  - component: {fileID: 5222600881691535228}
+  m_Layer: 6
   m_Name: Tank
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -928,7 +928,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d7ca9fb5aa30155449192b23d7fb3336, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4932ab25b84dd7649b80af68a9660ddc, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1131,7 +1131,17 @@ MonoBehaviour:
   explosionPrefab: {fileID: 123245465051007273, guid: 5a81b600d151cf344b1d78b93ad3a7c7,
     type: 3}
   healthUI: {fileID: 7216595524570786187}
---- !u!114 &1535745822
+  fireTransform: {fileID: 2011075264}
+  shootingAudio: {fileID: 2045302359033538892}
+  engineAudio: {fileID: 1631346930846710338}
+  drivingClip: {fileID: 8300000, guid: d7ca9fb5aa30155449192b23d7fb3336, type: 3}
+  idleClip: {fileID: 8300000, guid: 4932ab25b84dd7649b80af68a9660ddc, type: 3}
+  chargingClip: {fileID: 8300000, guid: c17f124fcdc0f5446a72f793898bd74b, type: 3}
+  fireClip: {fileID: 8300000, guid: 672a9941361ad494a99fba36759eca80, type: 3}
+  shellPrefab: {fileID: 4787996438960372904, guid: 8c278e73769008e40beb025ffe87abc2,
+    type: 3}
+  destroyDelete: 5
+--- !u!114 &5222600881691535228
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1140,16 +1150,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7796484086670563782}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0606226e76d78f47af1e46d89fa1449, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f587d6b7e805b54ea157d7aaa539ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shellPrefab: {fileID: 4787996438960372904, guid: 8c278e73769008e40beb025ffe87abc2,
-    type: 3}
-  fireTransform: {fileID: 2011075264}
   aimSlider: {fileID: 1671387414}
-  shootingAudio: {fileID: 2045302359033538892}
-  chargingClip: {fileID: 8300000, guid: c17f124fcdc0f5446a72f793898bd74b, type: 3}
-  fireClip: {fileID: 8300000, guid: 672a9941361ad494a99fba36759eca80, type: 3}
+  minShellVelocity: 15
+  maxShellVelocity: 30
 --- !u!1 &7796484086670563786
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,7 +1165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7796484086670525482}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TankRenderers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1196,7 +1202,7 @@ GameObject:
   - component: {fileID: 7796484086670525486}
   - component: {fileID: 7796484086667658356}
   - component: {fileID: 7796484086668625588}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TankTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1278,7 +1284,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8315656040707728460}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1373,6 +1379,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeftDustTrail
       objectReference: {fileID: 0}
+    - target: {fileID: 6553323532837875691, guid: 90a913f38686b3e47aba26a862071fb9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90a913f38686b3e47aba26a862071fb9, type: 3}
 --- !u!4 &6118763081090999801 stripped
@@ -1447,6 +1458,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RightDustTrail
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553323532837875691, guid: 90a913f38686b3e47aba26a862071fb9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90a913f38686b3e47aba26a862071fb9, type: 3}
