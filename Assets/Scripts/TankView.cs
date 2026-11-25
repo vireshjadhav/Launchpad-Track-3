@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TankView : MonoBehaviour
 {
@@ -18,6 +17,7 @@ public class TankView : MonoBehaviour
     [SerializeField] private AudioClip chargingClip;
     [SerializeField] private AudioClip fireClip;
     [SerializeField] private ShellController shellPrefab;
+    [SerializeField] private float destroyDelete;
 
     private ParticleSystem explosionParticles;
     private AudioSource explosionAudio;
@@ -75,8 +75,6 @@ public class TankView : MonoBehaviour
         shootingAudio.Play();
     }
 
-
-
     public void PlayeExplosion()
     {
         explosionParticles.transform.position = transform.position;
@@ -94,7 +92,12 @@ public class TankView : MonoBehaviour
 
     public void DisableTank()
     {
-        gameObject.SetActive (false);
+        Transform firstChild = transform.GetChild(0); 
+
+        GameObject firstChildObj = firstChild.gameObject;
+        firstChildObj.SetActive (false);
+
+        Destroy(gameObject, destroyDelete);
     }
 
     public void SetCamera(GameObject cameraObject)

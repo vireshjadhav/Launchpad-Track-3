@@ -10,6 +10,7 @@ public class TankSelectionUI : MonoBehaviour
     [SerializeField] private Button blueTankButton;
     [SerializeField] private Button yellowTankButton;
     [SerializeField] private TankSpawner tankSpawner;
+    [SerializeField] private EnemySpawner enemySpawner;
 
     // Start is called before the first frame update
     void Start()
@@ -31,21 +32,25 @@ public class TankSelectionUI : MonoBehaviour
     {
         tankSpawner.CreateTank(TankType.GreenTank);
         this.gameObject.SetActive(false);
+        enemySpawner.SetPlayerSpwaned();
     }
     private void RedTankSelection()
     {
         tankSpawner.CreateTank(TankType.RedTank);
         this.gameObject.SetActive(false);
+        enemySpawner.SetPlayerSpwaned();
     }
     private void BlueTankSelection()
     {
         tankSpawner.CreateTank(TankType.BlueTank);
         this.gameObject.SetActive(false);
+        enemySpawner.SetPlayerSpwaned();
     }
     private void YellowTankSelection()
     {
         tankSpawner.CreateTank(TankType.YellowTank);
         this.gameObject.SetActive(false);
+        enemySpawner.SetPlayerSpwaned();
     }
 
     private void OnDestroy()

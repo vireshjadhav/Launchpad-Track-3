@@ -15,9 +15,10 @@ MonoBehaviour:
   tankName: GreenTank
   tankTypes: 0
   shellType: 0
-  movementSpeed: 30
+  movementSpeed: 15
   rotationSpeed: 150
-  maxHealth: 60
+  maxHealth: 200
   launchVelocity: 15
+  tankPoints: 5
   color: {fileID: 2100000, guid: c39933e60e73205419d1f79a2af1fdac, type: 2}
   scale: {x: 0.5, y: 0.5, z: 0.5}

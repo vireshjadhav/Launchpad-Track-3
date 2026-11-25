@@ -10,8 +10,11 @@ public class TankModel
 
     private float maxHealth;
     private float currentHealth;
-    public float movementSpeed;
-    public float rotationSpeed;
+    private float launchVelocity;
+    private float tankPoints;
+    private float movementSpeed;
+    private float rotationSpeed;
+    
 
     private float maxChargeTime = 0.75f;
 
@@ -20,6 +23,10 @@ public class TankModel
     public float CurrentHealth => currentHealth;
     public float MaxHealth => maxHealth;
     public float MaxChargeTime => maxChargeTime;
+    public float LaunchVelocity => launchVelocity;
+    public float MovementSpeed => movementSpeed;
+    public float RotationSpeed => rotationSpeed;
+    public float TankPoints => tankPoints;
     public bool IsDead => isDead;
 
     public TankModel(TankScriptableObject _tank)
@@ -32,7 +39,9 @@ public class TankModel
         color = _tank.color;
         maxHealth = _tank.maxHealth;
         currentHealth = _tank.maxHealth;
+        launchVelocity = _tank.launchVelocity;
         scale = _tank.scale;
+        tankPoints = _tank.tankPoints;
         isDead = false;
     }
 

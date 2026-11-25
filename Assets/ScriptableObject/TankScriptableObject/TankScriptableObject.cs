@@ -10,6 +10,7 @@ public class TankScriptableObject : ScriptableObject
     public float rotationSpeed;
     public float maxHealth;
     public float launchVelocity;
+    public float tankPoints;
     public Material color;
     public Vector3 scale;
 }

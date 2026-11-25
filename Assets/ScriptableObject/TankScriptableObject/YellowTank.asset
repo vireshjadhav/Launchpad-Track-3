@@ -15,9 +15,10 @@ MonoBehaviour:
   tankName: YellowTank
   tankTypes: 3
   shellType: 1
-  movementSpeed: 22
+  movementSpeed: 8
   rotationSpeed: 90
-  maxHealth: 120
+  maxHealth: 250
   launchVelocity: 15
+  tankPoints: 5
   color: {fileID: 2100000, guid: 6221f2fbc7212d94cb9c069ee262d824, type: 2}
   scale: {x: 1, y: 1, z: 1}

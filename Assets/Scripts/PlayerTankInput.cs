@@ -9,16 +9,16 @@ public class PlayerTankInput : MonoBehaviour
     private float currentLaunchVelocity;
 
     private TankController tankController;
-    private TankView tankView;
+    
     private TankModel tankModel;
     private GameObject cam;
-
+    private TankView tankView;
+    
     [SerializeField] private Slider aimSlider;
     [SerializeField] private float minShellVelocity = 15.0f;
     [SerializeField] private float maxShellVelocity = 30.0f;
 
     private bool fired = false;
-
 
     private void Awake()
     {
@@ -48,6 +48,7 @@ public class PlayerTankInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (tankModel.IsDead) return;
         Movement();
 
         tankView.PlayMovementAudio();
@@ -56,6 +57,7 @@ public class PlayerTankInput : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(tankModel.IsDead) return;
         tankController.Move(movement);
         tankController.Rotate(rotation);
     }
@@ -133,5 +135,12 @@ public class PlayerTankInput : MonoBehaviour
     public void DetachCam()
     {
         cam.transform.parent = null;
+    }
+
+    public bool IsDead() => tankModel.IsDead;
+
+    public void UpdateScore(float tankPoints)
+    {
+        tankController.UpdateScore(tankPoints);
     }
 }
